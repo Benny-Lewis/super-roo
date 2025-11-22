@@ -109,12 +109,12 @@ cp -r /path/to/super-roo/.roo .
 
 ### Quick Start
 
-1. **Start a session** - RooCode defaults to superroo-architect mode
-2. **Plan your work** - Brainstorm, create implementation plan
-3. **Switch to code mode** - Implement with TDD
-4. **Auto-review triggers** - After each task completion
-5. **Address feedback** - Fix issues with TDD
-6. **Finish branch** - Verify, merge, clean up
+1. **Select superroo-architect mode** - Open RooCode mode selector, choose superroo-architect
+2. **Plan your work** - Brainstorm design, create implementation plan
+3. **Switch to superroo-code mode** - Implement with TDD (test-first, always)
+4. **Auto-review triggers** - Review spawns automatically after each task completion
+5. **Address feedback** - Fix issues using TDD
+6. **Switch to superroo-architect** - Use `/finish` to complete branch (merge/PR/cleanup)
 
 ### Example Workflow
 

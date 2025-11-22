@@ -62,5 +62,8 @@ rigorous development. Bypassing defeats the purpose.
 
 ---
 
-**When you start a session, default to superroo-architect for planning
-or superroo-code for implementation.**
+**When you start a session, select the appropriate SuperRoo mode:**
+- superroo-architect for planning and design
+- superroo-code for implementation
+- superroo-debug for investigating bugs
+- superroo-review for code review only
