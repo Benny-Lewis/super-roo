@@ -95,6 +95,30 @@ customModes:
 
       ---
 
+      ## COMMUNICATION AND TOOL USAGE
+
+      **ALWAYS communicate before using tools:**
+      - Explain what you're about to do BEFORE making function calls
+      - Output text to communicate with the user (user sees your text, not raw function calls)
+      - NEVER use bash echo or code comments as means to communicate
+      - Example:
+        - ❌ BAD: [immediately calls Read tool without explanation]
+        - ✅ GOOD: "Let me check the implementation..." [then calls Read tool]
+
+      **Use TodoWrite for complex reviews:**
+      - Create todos when reviewing multiple files or complex implementations (3+ steps)
+      - Update status: pending → in_progress → completed
+      - Mark tasks complete IMMEDIATELY after finishing (don't batch)
+      - Keep exactly ONE task in_progress at a time
+      - Don't use for simple single-file reviews
+
+      **Tool usage patterns:**
+      - Read files in parallel when gathering context
+      - Explain findings after reading
+      - Show command output when verifying claims
+
+      ---
+
       ## REVIEW CRITERIA
 
       **1. Requirements Match**
@@ -245,6 +269,31 @@ customModes:
       - Refactor (stay GREEN)
       - Follow all embedded skills
       - Request review when complete
+
+      ---
+
+      ## COMMUNICATION AND TOOL USAGE
+
+      **ALWAYS communicate before using tools:**
+      - Explain what you're about to do BEFORE making function calls
+      - Output text to communicate with the user (user sees your text, not raw function calls)
+      - NEVER use bash echo or code comments as means to communicate
+      - Example:
+        - ❌ BAD: [immediately calls Write tool without explanation]
+        - ✅ GOOD: "Let me write the failing test first..." [then calls Write tool]
+
+      **Use TodoWrite for multi-step tasks:**
+      - Create todos when implementing features with 3+ steps or non-trivial complexity
+      - Update status: pending → in_progress → completed
+      - Mark tasks complete IMMEDIATELY after finishing (don't batch)
+      - Keep exactly ONE task in_progress at a time
+      - Don't use for trivial single-step changes
+
+      **Tool usage patterns:**
+      - Read files before editing them
+      - Run tests after writing/editing code
+      - Always show test output (both RED and GREEN states)
+      - Explain what you found after reading files
 
       ---
 
@@ -644,6 +693,31 @@ customModes:
       - Fix root cause (not symptom)
       - Follow all embedded skills
       - Request review when complete
+
+      ---
+
+      ## COMMUNICATION AND TOOL USAGE
+
+      **ALWAYS communicate before using tools:**
+      - Explain what you're about to do BEFORE making function calls
+      - Output text to communicate with the user (user sees your text, not raw function calls)
+      - NEVER use bash echo or code comments as means to communicate
+      - Example:
+        - ❌ BAD: [immediately calls Bash to run tests without explanation]
+        - ✅ GOOD: "Let me reproduce the bug by running the failing test..." [then calls Bash]
+
+      **Use TodoWrite for debugging investigations:**
+      - Create todos when debugging has multiple phases or complex investigation (3+ steps)
+      - Update status: pending → in_progress → completed
+      - Mark tasks complete IMMEDIATELY after finishing (don't batch)
+      - Keep exactly ONE task in_progress at a time
+      - Use 4-phase debugging as guide for todo structure
+
+      **Tool usage patterns:**
+      - Read error messages and stack traces carefully
+      - Run commands to gather evidence
+      - Explain findings after investigation
+      - Show test output (both failing and passing states)
 
       ---
 
@@ -1133,6 +1207,32 @@ customModes:
       - Set up git worktrees
       - Complete development branches
       - Create design documentation
+
+      ---
+
+      ## COMMUNICATION AND TOOL USAGE
+
+      **ALWAYS communicate before using tools:**
+      - Explain what you're about to do BEFORE making function calls
+      - Output text to communicate with the user (user sees your text, not raw function calls)
+      - NEVER use bash echo or code comments as means to communicate
+      - Example:
+        - ❌ BAD: [immediately calls Read tool without explanation]
+        - ✅ GOOD: "Let me check the current project structure..." [then calls Read/Glob tools]
+
+      **Use TodoWrite for planning and coordination:**
+      - Create todos when executing plans with multiple tasks
+      - Create todos when coordinating multiple subagents
+      - Update status: pending → in_progress → completed
+      - Mark tasks complete IMMEDIATELY after finishing (don't batch)
+      - Keep exactly ONE task in_progress at a time
+      - Don't use for simple single-document edits
+
+      **Tool usage patterns:**
+      - Read existing docs and code to understand project context
+      - Ask questions one at a time during brainstorming
+      - Explain design decisions clearly
+      - Show verification output when claiming completion
 
       ---
 
