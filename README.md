@@ -2,35 +2,45 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Superpowers methodology ported to RooCode**
+**Rigorous development discipline for RooCode.**
 
-A battle-tested development methodology featuring TDD, systematic debugging, rigorous code review, and disciplined workflows - now available for RooCode.
-
----
-
-## What is super-roo?
-
-super-roo brings the [superpowers](https://github.com/obra/superpowers) development methodology from Claude Code to RooCode. It provides:
-
-- 🔴 **Test-Driven Development (TDD)** - RED-GREEN-REFACTOR cycle enforced
-- 🔍 **Systematic Debugging** - 4-phase root-cause investigation
-- 👁️ **Automatic Code Review** - Review after every task completion
-- 📐 **Rigorous Planning** - Design before implementation
-- ✅ **Verification-First** - Evidence before completion claims
+Enforced TDD, systematic debugging, and automatic code review—the [superpowers](https://github.com/obra/superpowers) methodology adapted for RooCode.
 
 ---
 
-## Features
+## What You Get
 
-### 4 Custom RooCode Modes
+**Four Custom Modes:**
+- **superroo-code** - TDD-driven implementation with automatic code review after every task
+- **superroo-debug** - 4-phase systematic debugging with root-cause tracing
+- **superroo-architect** - Design refinement, comprehensive planning, git worktree workflows
+- **superroo-review** - Rigorous code review (read-only, structural constraints)
 
-1. **superroo-code** - TDD-driven implementation with auto-review
-2. **superroo-debug** - Systematic root-cause debugging
-3. **superroo-architect** - Design, planning, and documentation
-4. **superroo-review** - Rigorous code review (read-only)
+**20 Embedded Skills** from original superpowers:
+- **test-driven-development** - RED-GREEN-REFACTOR cycle enforced
+- **systematic-debugging** - 4-phase root-cause investigation framework
+- **brainstorming** - Socratic design refinement with incremental validation
+- **verification-before-completion** - Evidence before any completion claims
+- **requesting-code-review** - Automatic review triggers after task completion
+- **testing-anti-patterns** - Prevents testing mock behavior, test-only methods
+- **root-cause-tracing** - Backward tracing through call stack to original trigger
+- **condition-based-waiting** - Eliminates flaky tests with proper async handling
+- **defense-in-depth** - Multi-layer validation makes bugs structurally impossible
+- **writing-plans** - Comprehensive implementation plans assuming zero context
+- **executing-plans** - Batch execution with review checkpoints
+- **using-git-worktrees** - Isolated workspace setup with safety verification
+- **finishing-a-development-branch** - Complete development with merge/PR/cleanup options
+- **subagent-driven-development** - Per-task subagent dispatch with review gates
+- **sharing-skills** - Contribute improvements back upstream
+- [Full details in ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
-### Core Principles (Non-Negotiable)
+**Automatic Quality Gates:**
+- Auto-triggered code review after every task completion (no asking permission)
+- Structural constraints enforced by RooCode (read-only review mode, docs-only architect)
+- Global rule prevents bypassing SuperRoo modes for convenience
+- Explicit role switching (conductor vs player) prevents implementation confusion
 
+**Core Principles (Non-Negotiable):**
 - 🔴 **NO CODE WITHOUT FAILING TEST FIRST**
 - ✅ **NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION**
 - 🔍 **ROOT CAUSE INVESTIGATION BEFORE FIXES**
@@ -49,7 +59,7 @@ super-roo brings the [superpowers](https://github.com/obra/superpowers) developm
 
 1. **Clone this repository:**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/super-roo.git
+   git clone https://github.com/Benny-Lewis/super-roo.git
    cd super-roo
    ```
 
@@ -78,9 +88,12 @@ super-roo brings the [superpowers](https://github.com/obra/superpowers) developm
 3. **Restart VS Code**
 
 4. **Verify installation:**
-   - Open VS Code
-   - RooCode should now show SuperRoo modes available
-   - Check for: superroo-code, superroo-debug, superroo-architect, superroo-review
+   - Restart VS Code
+   - Open RooCode mode selector
+
+   **Expected result:**
+   - Modes dropdown shows: superroo-code, superroo-debug, superroo-architect, superroo-review
+   - Global rule loaded (enforces methodology discipline)
 
 ### Project-Specific Installation
 
@@ -141,6 +154,19 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for complete technical details.
 
 ---
 
+## Philosophy
+
+SuperRoo enforces discipline through structure, not suggestions:
+
+- **Discipline over convenience** - The methodology enforces good practices, it doesn't suggest them
+- **Evidence before claims** - "Fixed" requires verification output, not confidence or assumptions
+- **Test-first always** - If you didn't watch the test fail, it proves nothing about behavior
+- **Root cause over symptoms** - Quick patches mask underlying issues and create more bugs
+- **Review catches issues early** - Automatic review after every task prevents compound problems
+- **Structural constraints** - Read-only review mode makes violations impossible, not just discouraged
+
+---
+
 ## Comparison to Original Superpowers
 
 | Aspect | Original (Claude Code) | super-roo (RooCode) |
@@ -152,7 +178,7 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for complete technical details.
 | Auto-discipline | Behavioral | Auto-trigger review ⭐ |
 | Mode bypass protection | N/A | Global rule ⭐ |
 
-**Fidelity:** 95% - Core methodology identical, some optimizations
+**Fidelity:** 95% - Core methodology identical, some optimizations for RooCode platform
 
 ---
 
@@ -180,14 +206,13 @@ MIT License - see [LICENSE](LICENSE) file
 
 - **Original superpowers** by [Jesse Vincent](https://github.com/obra) - [github.com/obra/superpowers](https://github.com/obra/superpowers)
 - **RooCode** by [RooCode Inc](https://github.com/RooCodeInc) - [github.com/RooCodeInc/Roo-Code](https://github.com/RooCodeInc/Roo-Code)
-- **super-roo port** - Bringing rigorous development methodology to RooCode
 
 ---
 
 ## Support
 
-- **Issues:** [GitHub Issues](https://github.com/YOUR_USERNAME/super-roo/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/YOUR_USERNAME/super-roo/discussions)
+- **Issues:** [GitHub Issues](https://github.com/Benny-Lewis/super-roo/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/Benny-Lewis/super-roo/discussions)
 - **Original superpowers:** [obra/superpowers](https://github.com/obra/superpowers)
 
 ---
