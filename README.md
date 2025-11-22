@@ -57,37 +57,35 @@ Enforced TDD, systematic debugging, and automatic code review—the [superpowers
 
 ### Global Installation (All Projects)
 
-1. **Clone this repository:**
-   ```bash
-   git clone https://github.com/Benny-Lewis/super-roo.git
-   cd super-roo
-   ```
+**Step 1: Clone the repository**
+```bash
+git clone https://github.com/Benny-Lewis/super-roo.git
+cd super-roo
+```
 
-2. **Copy files to RooCode settings:**
+**Step 2: Copy files to RooCode settings**
 
-   **Windows:**
-   ```bash
-   # Copy modes file
-   copy .roomodes %APPDATA%\Code\User\roo-code-settings\customModes.json
+Run these commands **from inside the super-roo directory** (where you just cloned it):
 
-   # Copy rules and commands
-   xcopy /E /I .roo\rules %APPDATA%\Code\User\roo-code-settings\rules
-   xcopy /E /I .roo\commands %APPDATA%\Code\User\roo-code-settings\commands
-   ```
+**Windows:**
+```bash
+copy .roomodes %APPDATA%\Code\User\roo-code-settings\customModes.json
+xcopy /E /I .roo\rules %APPDATA%\Code\User\roo-code-settings\rules
+xcopy /E /I .roo\commands %APPDATA%\Code\User\roo-code-settings\commands
+```
 
-   **macOS/Linux:**
-   ```bash
-   # Copy modes file
-   cp .roomodes ~/.config/Code/User/roo-code-settings/customModes.json
+**macOS/Linux:**
+```bash
+cp .roomodes ~/.config/Code/User/roo-code-settings/customModes.json
+cp -r .roo/rules ~/.config/Code/User/roo-code-settings/
+cp -r .roo/commands ~/.config/Code/User/roo-code-settings/
+```
 
-   # Copy rules and commands
-   cp -r .roo/rules ~/.config/Code/User/roo-code-settings/
-   cp -r .roo/commands ~/.config/Code/User/roo-code-settings/
-   ```
+**Note:** These commands copy files from the current directory (`.roomodes`, `.roo/*`) to your RooCode settings folder. No modifications needed—just run them as-is.
 
-3. **Restart VS Code**
+**Step 3: Restart VS Code**
 
-4. **Verify installation:**
+**Step 4: Verify installation**
    - Restart VS Code
    - Open RooCode mode selector
 
