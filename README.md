@@ -22,10 +22,10 @@ super-roo brings the [superpowers](https://github.com/obra/superpowers) developm
 
 ### 4 Custom RooCode Modes
 
-1. **superpowers-code** - TDD-driven implementation with auto-review
-2. **superpowers-debug** - Systematic root-cause debugging
-3. **superpowers-architect** - Design, planning, and documentation
-4. **superpowers-review** - Rigorous code review (read-only)
+1. **superroo-code** - TDD-driven implementation with auto-review
+2. **superroo-debug** - Systematic root-cause debugging
+3. **superroo-architect** - Design, planning, and documentation
+4. **superroo-review** - Rigorous code review (read-only)
 
 ### Core Principles (Non-Negotiable)
 
@@ -77,8 +77,8 @@ super-roo brings the [superpowers](https://github.com/obra/superpowers) developm
 
 4. **Verify installation:**
    - Open VS Code
-   - RooCode should now show superpowers modes available
-   - Check for: superpowers-code, superpowers-debug, superpowers-architect, superpowers-review
+   - RooCode should now show SuperRoo modes available
+   - Check for: superroo-code, superroo-debug, superroo-architect, superroo-review
 
 ### Project-Specific Installation
 
@@ -96,7 +96,7 @@ cp -r /path/to/super-roo/.roo .
 
 ### Quick Start
 
-1. **Start a session** - RooCode defaults to superpowers-architect mode
+1. **Start a session** - RooCode defaults to superroo-architect mode
 2. **Plan your work** - Brainstorm, create implementation plan
 3. **Switch to code mode** - Implement with TDD
 4. **Auto-review triggers** - After each task completion
@@ -108,18 +108,18 @@ cp -r /path/to/super-roo/.roo .
 ```
 User: "Add user authentication"
 
-superpowers-architect mode:
+superroo-architect mode:
 → Brainstorm design (Socratic questions)
 → Write implementation plan (5 TDD-based tasks)
 
-superpowers-code mode:
+superroo-code mode:
 → Task 1: Write failing test → Implement → Refactor
 → Auto-review triggers → Address feedback
 → Task 2: Write failing test → Implement → Refactor
 → Auto-review triggers → Address feedback
 → ... (repeat for all tasks)
 
-superpowers-architect mode:
+superroo-architect mode:
 → Finish branch (verify, create PR, cleanup)
 ```
 
