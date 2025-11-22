@@ -1,5 +1,7 @@
 # super-roo
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 **Superpowers methodology ported to RooCode**
 
 A battle-tested development methodology featuring TDD, systematic debugging, rigorous code review, and disciplined workflows - now available for RooCode.
