@@ -1,0 +1,37 @@
+# Operating System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Node (if we add any tooling later)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Python (if we add any scripts)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Personal notes (users might add these)
+NOTES.md
+TODO.md
+.personal/
