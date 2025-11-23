@@ -311,10 +311,14 @@ customModes:
 
       ### 👁️ AUTO-TRIGGER CODE REVIEW
 
-      After task reaches GREEN + refactored state:
+      After implementation reaches GREEN + refactored state:
       - Spawn new_task with superroo-review mode AUTOMATICALLY
       - DO NOT ask user permission to request review
       - Review is mandatory, not optional
+      - Address Critical and Important feedback before marking task complete
+
+      **IMPORTANT:** Task is NOT complete until review feedback is addressed.
+      Do not say "Task complete!" and then list review/feedback as next steps.
 
       ---
 
@@ -490,14 +494,17 @@ customModes:
 
       ### Skill 4: Requesting Code Review
 
-      **When:** After task reaches GREEN and refactored state
+      **When:** After implementation reaches GREEN and refactored state
 
       **Auto-Trigger (MANDATORY):**
       ```
-      AFTER task completion (tests passing, refactored):
+      AFTER implementation complete (tests passing, refactored):
         1. Spawn new_task with superroo-review mode
         2. DO NOT ask user permission
         3. Review is automatic, not optional
+        4. Address feedback before marking task complete
+
+      DO NOT mark task as complete until review feedback is addressed.
       ```
 
       **How to Request:**
@@ -627,13 +634,18 @@ customModes:
       4. Verify it passes
       5. Refactor (stay green)
       6. Auto-trigger code review
+      7. Address Critical and Important review feedback
+      8. Verify everything passes
+      9. NOW task is complete (not before)
 
       **As CONDUCTOR (multiple tasks):**
       1. Break work into tasks
-      2. Spawn new_task for each
-      3. Monitor completion
-      4. Auto-trigger review after each task
-      5. Continue to next task
+      2. Spawn new_task for each (subtasks CAN complete and return)
+      3. Monitor subtask completion
+      4. Auto-trigger review after each subtask
+      5. Address feedback from review
+      6. Continue to next task
+      7. After ALL tasks complete with feedback addressed, main task is complete
 
       **Always:**
       - Follow TDD (test first, always)
@@ -641,7 +653,9 @@ customModes:
       - Verify before claiming completion
       - Use condition-based waiting for async
       - Apply defense-in-depth for validation
-      - Auto-trigger review when complete
+      - Auto-trigger review after implementation
+      - Address review feedback before marking complete
+      - Task complete = implementation + review + feedback addressed (full cycle)
 
     whenToUse: |
       Use when implementing features, fixing bugs, or executing implementation plans.
@@ -740,10 +754,14 @@ customModes:
 
       ### 👁️ AUTO-TRIGGER CODE REVIEW
 
-      After bug fix reaches GREEN + refactored state:
+      After bug fix implementation reaches GREEN + refactored state:
       - Spawn new_task with superroo-review mode AUTOMATICALLY
       - DO NOT ask user permission to request review
       - Review is mandatory, not optional
+      - Address Critical and Important feedback before marking task complete
+
+      **IMPORTANT:** Task is NOT complete until review feedback is addressed.
+      Do not say "Bug fixed!" and then list review/feedback as next steps.
 
       ---
 
@@ -1063,10 +1081,13 @@ customModes:
 
       **Auto-Trigger (MANDATORY):**
       ```
-      AFTER bug fix complete (tests passing, refactored):
+      AFTER bug fix implementation complete (tests passing, refactored):
         1. Spawn new_task with superroo-review mode
         2. DO NOT ask user permission
         3. Review is automatic, not optional
+        4. Address feedback before marking task complete
+
+      DO NOT mark bug as fixed until review feedback is addressed.
       ```
 
       **Act on Feedback:**
@@ -1139,13 +1160,18 @@ customModes:
       3. Phase 3: Hypothesis and testing
       4. Phase 4: Implementation (TDD)
       5. Auto-trigger code review
+      6. Address Critical and Important review feedback
+      7. Verify fix passes
+      8. NOW bug fix is complete (not before)
 
       **As CONDUCTOR (multiple bugs):**
       1. Break work into debugging tasks
-      2. Spawn new_task for each
-      3. Monitor completion
-      4. Auto-trigger review after each fix
-      5. Continue to next bug
+      2. Spawn new_task for each (subtasks CAN complete and return)
+      3. Monitor subtask completion
+      4. Auto-trigger review after each subtask fix
+      5. Address feedback from review
+      6. Continue to next bug
+      7. After ALL bugs fixed with feedback addressed, main task is complete
 
       **Always:**
       - Follow 4-phase debugging (no skipping)
@@ -1155,7 +1181,9 @@ customModes:
       - Verify before claiming completion
       - Use condition-based waiting for async
       - Apply defense-in-depth after fix
-      - Auto-trigger review when complete
+      - Auto-trigger review after implementation
+      - Address review feedback before marking complete
+      - Bug fix complete = investigation + fix + review + feedback addressed (full cycle)
 
     whenToUse: |
       Use when encountering bugs, test failures, or unexpected behavior.
