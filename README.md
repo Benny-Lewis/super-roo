@@ -93,6 +93,27 @@ cp -r .roo/commands ~/.config/Code/User/roo-code-settings/
    - Modes dropdown shows: superroo-code, superroo-debug, superroo-architect, superroo-review
    - Global rule loaded (enforces methodology discipline)
 
+**Step 5: Recommended - Configure Auto-Approval**
+
+Speed up SuperRoo's read-heavy investigation workflows by auto-approving read-only operations.
+
+Add this to your VS Code settings.json (`Ctrl+,` → "Open Settings (JSON)"):
+
+```json
+"roo-cline.autoApprovalSettings": {
+  "read_file": true,
+  "list_files": true,
+  "search_files": true,
+  "list_code_definition_names": true
+}
+```
+
+**What this does:**
+- ✅ Auto-approves: Reading files, listing files, searching, and code definition lookups
+- 🛡️ Still requires approval: File edits, command execution, and all write operations
+
+This significantly speeds up debugging and code review workflows while maintaining safety for destructive operations.
+
 ### Project-Specific Installation
 
 To use super-roo in a single project:
