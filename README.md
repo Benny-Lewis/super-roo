@@ -10,35 +10,46 @@ Enforced TDD, systematic debugging, and automatic code review—the [superpowers
 
 ## What You Get
 
-**Four Custom Modes:**
-- **superroo-code** - TDD-driven implementation with automatic code review after every task
-- **superroo-debug** - 4-phase systematic debugging with root-cause tracing
-- **superroo-architect** - Design refinement, comprehensive planning, git worktree workflows
-- **superroo-review** - Rigorous code review (read-only, structural constraints)
+**20 Skill-Modes** (1:1 mapping to [obra/superpowers](https://github.com/obra/superpowers)):
 
-**20 Embedded Skills** from original superpowers:
+**Entry Point:**
+- **using-superpowers** - Entry point that helps you select the right skill
+
+**Development Skills (7):**
 - **test-driven-development** - RED-GREEN-REFACTOR cycle enforced
-- **systematic-debugging** - 4-phase root-cause investigation framework
-- **brainstorming** - Socratic design refinement with incremental validation
-- **verification-before-completion** - Evidence before any completion claims
-- **requesting-code-review** - Automatic review triggers after task completion
 - **testing-anti-patterns** - Prevents testing mock behavior, test-only methods
-- **root-cause-tracing** - Backward tracing through call stack to original trigger
+- **verification-before-completion** - Evidence before any completion claims
 - **condition-based-waiting** - Eliminates flaky tests with proper async handling
 - **defense-in-depth** - Multi-layer validation makes bugs structurally impossible
+- **receiving-code-review** - Process review feedback with technical rigor
+- **requesting-code-review** - Perform rigorous code review (read-only mode)
+
+**Debugging Skills (3):**
+- **systematic-debugging** - 4-phase root-cause investigation framework
+- **root-cause-tracing** - Backward tracing through call stack to original trigger
+- **dispatching-parallel-agents** - Spawn multiple independent investigations concurrently
+
+**Planning & Architecture Skills (6):**
+- **brainstorming** - Socratic design refinement with incremental validation
 - **writing-plans** - Comprehensive implementation plans assuming zero context
 - **executing-plans** - Batch execution with review checkpoints
+- **subagent-driven-development** - Per-task subagent dispatch with review gates
 - **using-git-worktrees** - Isolated workspace setup with safety verification
 - **finishing-a-development-branch** - Complete development with merge/PR/cleanup options
-- **subagent-driven-development** - Per-task subagent dispatch with review gates
+
+**Meta & Workflow Skills (4):**
+- **writing-skills** - Create new skills with TDD
+- **testing-skills-with-subagents** - Validate skills work under pressure
 - **sharing-skills** - Contribute improvements back upstream
-- [Full details in ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- **using-superpowers** (listed above)
+
+[Full details in ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
 **Automatic Quality Gates:**
 - Auto-triggered code review after every task completion (no asking permission)
-- Structural constraints enforced by RooCode (read-only review mode, docs-only architect)
-- Global rule prevents bypassing SuperRoo modes for convenience
-- Explicit role switching (conductor vs player) prevents implementation confusion
+- Structural constraints enforced by RooCode (read-only review mode)
+- Skills compose via isolated subtasks (using RooCode's `new_task`)
+- Each skill has clear completion criteria and return summaries
 
 **Core Principles (Non-Negotiable):**
 - 🔴 **NO CODE WITHOUT FAILING TEST FIRST**
@@ -90,8 +101,8 @@ cp -r .roo/commands ~/.config/Code/User/roo-code-settings/
    - Open RooCode mode selector
 
    **Expected result:**
-   - Modes dropdown shows: superroo-code, superroo-debug, superroo-architect, superroo-review
-   - Global rule loaded (enforces methodology discipline)
+   - Modes dropdown shows 20 skill-modes (using-superpowers, test-driven-development, etc.)
+   - Slash commands work: `/tdd`, `/debug`, `/brainstorm`, `/write-plan`, `/execute-plan`, `/review`
 
 **Step 5: Recommended - Configure Auto-Approval**
 
@@ -130,31 +141,57 @@ cp -r /path/to/super-roo/.roo .
 
 ### Quick Start
 
-1. **Select superroo-architect mode** - Open RooCode mode selector, choose superroo-architect
-2. **Plan your work** - Brainstorm design, create implementation plan
-3. **Switch to superroo-code mode** - Implement with TDD (test-first, always)
-4. **Auto-review triggers** - Review spawns automatically after each task completion
-5. **Address feedback** - Fix issues using TDD
-6. **Switch to superroo-architect** - Use `/finish` to complete branch (merge/PR/cleanup)
+**Option 1: Let SuperRoo Choose**
+1. **Start with using-superpowers mode** - Entry point that analyzes your request
+2. **SuperRoo selects appropriate skill** - Automatically spawns the right mode
+3. **Skills auto-compose** - TDD triggers review, brainstorm offers to create plan, etc.
 
-### Example Workflow
+**Option 2: Direct Skill Selection**
+1. **Use slash commands** - Quick access: `/tdd`, `/debug`, `/brainstorm`
+2. **Or select mode directly** - Choose from 20 skill-modes in dropdown
+3. **Skills auto-compose** - Each skill knows when to invoke others
 
+### Example Workflows
+
+**Feature Implementation:**
 ```
 User: "Add user authentication"
 
-superroo-architect mode:
-→ Brainstorm design (Socratic questions)
-→ Write implementation plan (5 TDD-based tasks)
+using-superpowers mode:
+→ Analyzes request → Selects brainstorming mode
+→ Spawns: brainstorming
 
-superroo-code mode:
-→ Task 1: Write failing test → Implement → Refactor
-→ Auto-review triggers → Address feedback
-→ Task 2: Write failing test → Implement → Refactor
-→ Auto-review triggers → Address feedback
-→ ... (repeat for all tasks)
+brainstorming mode:
+→ Refines design through Socratic questions
+→ Presents 2-3 approaches with trade-offs
+→ User approves design
+→ Offers: writing-plans
 
-superroo-architect mode:
-→ Finish branch (verify, create PR, cleanup)
+writing-plans mode:
+→ Creates detailed plan with TDD tasks
+→ Offers: executing-plans
+
+executing-plans mode:
+→ Spawns: test-driven-development (Task 1)
+  → RED-GREEN-REFACTOR
+  → Auto-spawns: requesting-code-review
+  → Returns to executing-plans
+→ Spawns: test-driven-development (Task 2)
+  → (repeat pattern)
+→ All tasks complete
+```
+
+**Quick Bug Fix:**
+```
+User: "/debug - tests failing for empty email"
+
+systematic-debugging mode:
+→ Investigates root cause (4-phase framework)
+→ Creates failing test (RED)
+→ Implements fix (GREEN)
+→ Auto-spawns: requesting-code-review
+→ Review feedback → Addresses issues
+→ Complete
 ```
 
 ---
@@ -165,11 +202,12 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for complete technical details.
 
 **Key design decisions:**
 
-- **Fat modes with explicit orchestration** - Modes have both conductor and player roles
+- **One mode per skill** - 20 skill-modes with 1:1 mapping to obra/superpowers
+- **Skill composition via new_task** - Skills invoke other skills with isolated contexts
 - **Auto-trigger code review** - Review is automatic after task completion
-- **Structural constraints** - Read-only review, docs-only architect edit
-- **Global rule** - Prevents mode bypass, establishes core principles
-- **Hierarchical subtasks** - Uses RooCode's native `new_task` (future MCP upgrade planned)
+- **Structural constraints** - Read-only review mode enforced by RooCode
+- **Entry point mode** - using-superpowers helps select the right skill
+- **90% fidelity to obra/superpowers** - Maximum compatibility with original methodology
 
 ---
 
@@ -191,13 +229,17 @@ SuperRoo enforces discipline through structure, not suggestions:
 | Aspect | Original (Claude Code) | super-roo (RooCode) |
 |--------|------------------------|---------------------|
 | Core methodology | TDD, debugging, review | Identical ✅ |
-| Skill count | 20 skills | 20 skills ✅ |
+| Skill count | 20 skills | 20 skill-modes ✅ |
+| Skill files | Separate files | Modes (embedded) 🟡 |
+| On-demand loading | Load when needed | Only active mode loaded ✅ |
+| Skill mental model | Skill-centric | Skill-centric ✅ |
+| Agent independence | Isolated (Task tool) | Isolated (new_task) ✅ |
+| Skill composability | Skills invoke skills | Modes invoke modes ✅ |
+| Auto skill detection | Automatic | Entry point mode 🟡 |
 | Workflows | All workflows | All preserved ✅ |
-| Sub-agents | Independent | Hierarchical (MCP upgrade planned) |
-| Auto-discipline | Behavioral | Auto-trigger review ⭐ |
-| Mode bypass protection | N/A | Global rule ⭐ |
+| Auto-discipline | Behavioral | Structural (auto-trigger) ⭐ |
 
-**Fidelity:** 95% - Core methodology identical, some optimizations for RooCode platform
+**Fidelity:** 90% - Core methodology identical, maximum compatibility with obra/superpowers
 
 ---
 
