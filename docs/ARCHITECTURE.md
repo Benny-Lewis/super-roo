@@ -311,6 +311,32 @@ graph TD
 
 ### Example 1: Feature Implementation
 
+**Visual workflow:**
+
+```mermaid
+graph TD
+    Start[User: Add user authentication] --> Entry[using-superpowers mode]
+    Entry --> Brain[brainstorming mode]
+    Brain --> Plan[writing-plans mode]
+    Plan --> Exec[executing-plans mode]
+    Exec --> TDD1[test-driven-development: Task 1]
+    TDD1 --> Review1[requesting-code-review]
+    Review1 --> TDD2[test-driven-development: Task 2]
+    TDD2 --> Review2[requesting-code-review]
+    Review2 --> Finish[finishing-a-development-branch]
+
+    style Entry fill:#e1f5ff
+    style Brain fill:#fff4e1
+    style Plan fill:#fff4e1
+    style Exec fill:#e8f5e9
+    style TDD1 fill:#e8f5e9
+    style TDD2 fill:#e8f5e9
+    style Review1 fill:#fce4ec
+    style Review2 fill:#fce4ec
+```
+
+**Detailed walkthrough:**
+
 ```
 1. User: "Add user authentication"
 
