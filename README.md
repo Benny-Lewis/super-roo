@@ -64,9 +64,11 @@ Enforced TDD, systematic debugging, and automatic code review—the [superpowers
 ### Prerequisites
 
 - [VS Code](https://code.visualstudio.com/)
-- [RooCode extension](https://github.com/RooCodeInc/Roo-Code) installed
+- [RooCode extension](https://marketplace.visualstudio.com/items?itemName=RooCline.roo-cline) installed
 
-### Global Installation (All Projects)
+### Global Installation (Recommended - Works Across All Projects)
+
+SuperRoo can be installed globally so it's available in **every project** you work on, or per-project if you prefer isolation.
 
 **Step 1: Clone the repository**
 ```bash
@@ -74,41 +76,65 @@ git clone https://github.com/Benny-Lewis/super-roo.git
 cd super-roo
 ```
 
-**Step 2: Copy files to RooCode settings**
+**Step 2: Copy files to RooCode's global settings directory**
 
 Run these commands **from inside the super-roo directory** (where you just cloned it):
 
-**Windows:**
-```bash
-copy .roomodes %APPDATA%\Code\User\roo-code-settings\customModes.json
-xcopy /E /I .roo\rules %APPDATA%\Code\User\roo-code-settings\rules
-xcopy /E /I .roo\commands %APPDATA%\Code\User\roo-code-settings\commands
+**Windows (PowerShell or CMD):**
+```powershell
+# Copy custom modes configuration
+copy .roomodes "$env:APPDATA\Code\User\roo-code-settings\customModes.json"
+
+# Copy rules and commands directories
+xcopy /E /I .roo\rules "$env:APPDATA\Code\User\roo-code-settings\rules"
+xcopy /E /I .roo\commands "$env:APPDATA\Code\User\roo-code-settings\commands"
 ```
 
 **macOS/Linux:**
 ```bash
+# Create settings directory if it doesn't exist
+mkdir -p ~/.config/Code/User/roo-code-settings
+
+# Copy custom modes configuration
 cp .roomodes ~/.config/Code/User/roo-code-settings/customModes.json
+
+# Copy rules and commands directories
 cp -r .roo/rules ~/.config/Code/User/roo-code-settings/
 cp -r .roo/commands ~/.config/Code/User/roo-code-settings/
 ```
 
-**Note:** These commands copy files from the current directory (`.roomodes`, `.roo/*`) to your RooCode settings folder. No modifications needed—just run them as-is.
+**What these paths mean:**
+- **Windows:** `%APPDATA%\Code\User\roo-code-settings\` (typically `C:\Users\YourName\AppData\Roaming\Code\User\roo-code-settings\`)
+- **macOS/Linux:** `~/.config/Code/User/roo-code-settings/`
+
+These are **global configuration directories** - once installed here, SuperRoo skill-modes will be available in **every project** you open in VS Code.
 
 **Step 3: Restart VS Code**
 
-**Step 4: Verify installation**
-   - Restart VS Code
-   - Open RooCode mode selector
+Close and reopen VS Code completely (not just reload window).
 
-   **Expected result:**
-   - Modes dropdown shows 20 skill-modes (using-superpowers, test-driven-development, etc.)
-   - Slash commands work: `/tdd`, `/debug`, `/brainstorm`, `/write-plan`, `/execute-plan`, `/review`
+**Step 4: Verify installation**
+
+Open any project in VS Code and check:
+
+**Expected results:**
+- **Modes dropdown** shows 20 SuperRoo skill-modes:
+  - using-superpowers, test-driven-development, systematic-debugging, brainstorming, etc.
+
+- **Slash commands** work in RooCode chat:
+  - `/tdd` - Test-driven development
+  - `/debug` - Systematic debugging
+  - `/brainstorm` - Design refinement
+  - `/write-plan` - Create implementation plan
+  - `/execute-plan` - Execute plan with TDD
+  - `/review` - Request code review
+  - `/finish` - Complete development branch
 
 **Step 5: Recommended - Configure Auto-Approval**
 
 Speed up SuperRoo's read-heavy investigation workflows by auto-approving read-only operations.
 
-Add this to your VS Code settings.json (`Ctrl+,` → "Open Settings (JSON)"):
+Add this to your VS Code `settings.json` (`Ctrl+,` or `Cmd+,` → "Open Settings (JSON)"):
 
 ```json
 "roo-cline.autoApprovalSettings": {
@@ -125,15 +151,25 @@ Add this to your VS Code settings.json (`Ctrl+,` → "Open Settings (JSON)"):
 
 This significantly speeds up debugging and code review workflows while maintaining safety for destructive operations.
 
-### Project-Specific Installation
+---
 
-To use super-roo in a single project:
+### Project-Specific Installation (Advanced)
+
+If you want SuperRoo **only in a specific project** (not globally), or want to override global settings for one project:
 
 ```bash
 # In your project directory
 cp /path/to/super-roo/.roomodes .
 cp -r /path/to/super-roo/.roo .
 ```
+
+**When to use project-specific installation:**
+- Testing SuperRoo modifications before global deployment
+- Project has custom skill-modes or rules
+- Working with a team that doesn't use SuperRoo globally
+- Want to use a different version of SuperRoo for a specific project
+
+**Note:** Project-specific installation (`.roomodes` and `.roo/` in project root) **overrides** global settings for that project only.
 
 ---
 
