@@ -2,7 +2,7 @@
 description: Execute plan in batches with review checkpoints
 ---
 
-Switch to superroo-architect mode and execute the implementation plan:
+Switch to executing-plans mode and execute the implementation plan:
 
 **Process:**
 1. Load and review plan critically

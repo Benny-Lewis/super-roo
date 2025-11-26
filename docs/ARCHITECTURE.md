@@ -1,351 +1,208 @@
 # SuperRoo Architecture
 
-**Technical documentation for the SuperRoo development methodology port to RooCode**
+**Technical documentation for the SuperRoo development methodology implementation in RooCode**
 
 ---
 
 ## Overview
 
-SuperRoo is a port of the [superpowers](https://github.com/obra/superpowers) development methodology from Claude Code to RooCode. It preserves the core discipline (TDD, systematic debugging, rigorous code review) while adapting to RooCode's mode-based architecture.
+SuperRoo is a 1:1 port of the [obra/superpowers](https://github.com/obra/superpowers) development methodology from Claude Code to RooCode. It preserves all 20 skills and the core TDD/debugging/review discipline while adapting to RooCode's mode-based architecture.
 
-**Core methodology:** 20 skills from original superpowers → 4 custom RooCode modes
-
----
-
-## Architecture Comparison
-
-| Aspect | Original Superpowers | SuperRoo (RooCode Port) |
-|--------|---------------------|------------------------|
-| **Platform** | Claude Code CLI | RooCode (VS Code extension) |
-| **Unit of work** | Skills (20 files) | Modes (4 custom modes) |
-| **Loading** | On-demand skill loading | Fat modes with embedded skills |
-| **Subtasks** | Independent agents (Task tool) | Hierarchical subtasks (new_task) |
-| **Discipline** | Behavioral (skills remind you) | Structural + Behavioral (auto-trigger review) |
-| **Mode bypass protection** | N/A | Global rule enforces mode usage |
-| **Code review** | Manual trigger | Auto-trigger after task completion |
+**Architecture:** 20 skills from superpowers → 20 skill-modes in RooCode (1:1 mapping)
 
 ---
 
 ## System Components
 
-### 1. Global Rule
+SuperRoo consists of three main components:
+
+### 1. Custom Modes (20 Skill-Modes)
+
+**File:** `.roomodes`
+
+All 20 skills from obra/superpowers are implemented as individual RooCode modes:
+
+**Entry Point:**
+- **using-superpowers** - Entry point that helps select the right skill
+
+**Development Skills (7):**
+- **test-driven-development** - RED-GREEN-REFACTOR cycle enforced
+- **testing-anti-patterns** - Prevents testing mock behavior, test-only methods
+- **verification-before-completion** - Evidence before any completion claims
+- **condition-based-waiting** - Eliminates flaky tests with proper async handling
+- **defense-in-depth** - Multi-layer validation makes bugs structurally impossible
+- **receiving-code-review** - Process review feedback with technical rigor
+- **requesting-code-review** - Perform rigorous code review
+
+**Debugging Skills (3):**
+- **systematic-debugging** - 4-phase root-cause investigation framework
+- **root-cause-tracing** - Backward tracing through call stack to original trigger
+- **dispatching-parallel-agents** - Spawn multiple independent investigations concurrently
+
+**Planning & Architecture Skills (6):**
+- **brainstorming** - Socratic design refinement with incremental validation
+- **writing-plans** - Comprehensive implementation plans assuming zero context
+- **executing-plans** - Batch execution with review checkpoints
+- **subagent-driven-development** - Per-task subagent dispatch with review gates
+- **using-git-worktrees** - Isolated workspace setup with safety verification
+- **finishing-a-development-branch** - Complete development with merge/PR/cleanup options
+
+**Meta & Workflow Skills (4):**
+- **writing-skills** - Create new skills with TDD
+- **testing-skills-with-subagents** - Validate skills work under pressure
+- **sharing-skills** - Contribute improvements back upstream
+- **using-superpowers** - (listed above as entry point)
+
+### 2. Slash Commands (7 Commands)
+
+**Directory:** `.roo/commands/`
+
+Quick-access shortcuts for common workflows:
+
+| Command | Mode Triggered | Purpose |
+|---------|---------------|---------|
+| `/tdd` | test-driven-development | Quick access to TDD workflow |
+| `/debug` | systematic-debugging | Quick access to debugging framework |
+| `/brainstorm` | brainstorming | Design refinement via Socratic method |
+| `/write-plan` | writing-plans | Create comprehensive implementation plan |
+| `/execute-plan` | executing-plans | Execute plan in batches with checkpoints |
+| `/review` | requesting-code-review | Request rigorous code review |
+| `/finish` | finishing-a-development-branch | Complete development (merge/PR/cleanup) |
+
+### 3. Workspace Rules
 
 **File:** `.roo/rules/superroo-workspace.md`
 
-**Purpose:** Enforces SuperRoo methodology discipline across all modes
+Global rule that enforces SuperRoo methodology across all modes:
 
-**Key principles:**
+**Core Principles (Non-Negotiable):**
 - 🔴 NO CODE WITHOUT FAILING TEST FIRST
 - ✅ NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION
 - 🔍 ROOT CAUSE INVESTIGATION BEFORE FIXES
 - 👁️ REVIEW EARLY, REVIEW OFTEN
 
-**Enforcement:**
-- Always loaded (global rule)
-- Prevents mode bypass
-- Establishes non-negotiable principles
-
----
-
-### 2. Custom Modes (4 Modes)
-
-All modes defined in: `.roomodes`
-
-#### superroo-review
-
-**Purpose:** Rigorous code review (read-only)
-
-**Role:** Pure Player (reviews only, never implements)
-
-**Tool Access:**
-- Groups: `read`, `command`
-- No `edit` permission (structural constraint)
-
-**Command Restrictions:**
-- ✅ Allowed: Read-only commands (`git diff`, `git log`, `cat`, `grep`)
-- ❌ Forbidden: State-mutating commands (`git commit`, `git push`, file writes)
-
-**Review Criteria:**
-1. Requirements match
-2. Tests exist and test behavior (not mocks)
-3. Bugs and edge cases
-4. Code follows project patterns
-5. Error handling
-
-**When used:**
-- Auto-triggered by superroo-code after task completion
-- Auto-triggered by superroo-debug after bug fix
-- Manually for design reviews
-
----
-
-#### superroo-code
-
-**Purpose:** TDD-driven implementation with auto-review
-
-**Roles:** Conductor + Player (explicit role switching)
-
-**Tool Access:**
-- Groups: `read`, `edit`, `command`
-- No fileRegex constraint (can edit all files)
-
-**Embedded Skills (6):**
-1. test-driven-development (RED-GREEN-REFACTOR)
-2. testing-anti-patterns (avoid testing mocks)
-3. verification-before-completion (evidence before claims)
-4. requesting-code-review (auto-trigger)
-5. condition-based-waiting (eliminate flaky tests)
-6. defense-in-depth (validate at every layer)
-
-**Auto-Trigger Review:**
-```
-AFTER task reaches GREEN + refactored:
-  1. Spawn new_task with superroo-review mode AUTOMATICALLY
-  2. DO NOT ask user permission
-  3. Review is mandatory, not optional
-```
-
-**Role Switching:**
-- **Conductor:** User provides multiple tasks or implementation plan
-  - Break into subtasks
-  - Spawn new_task for each
-  - Monitor completion, trigger review
-- **Player:** Single focused feature/bugfix
-  - Write tests first (RED)
-  - Implement minimal code (GREEN)
-  - Refactor (stay GREEN)
-  - Request review when complete
-
-**When used:** Implementing features, fixing bugs, executing plans
-
----
-
-#### superroo-debug
-
-**Purpose:** Systematic root-cause debugging with TDD
-
-**Roles:** Conductor + Player (explicit role switching)
-
-**Tool Access:**
-- Groups: `read`, `edit`, `command`
-- No fileRegex constraint (can edit all files)
-
-**Embedded Skills (8):**
-1. systematic-debugging (4-phase framework)
-2. root-cause-tracing (backward tracing to original trigger)
-3. test-driven-development (RED-GREEN-REFACTOR)
-4. testing-anti-patterns (avoid testing mocks)
-5. verification-before-completion (evidence before claims)
-6. requesting-code-review (auto-trigger)
-7. condition-based-waiting (eliminate flaky tests)
-8. defense-in-depth (validate at every layer)
-
-**4-Phase Debugging Framework:**
-1. **Root Cause Investigation** - Reproduce, gather evidence, trace data flow
-2. **Pattern Analysis** - Find working examples, compare, identify differences
-3. **Hypothesis and Testing** - Form hypothesis, test minimally, verify
-4. **Implementation** - Create failing test, fix root cause, verify
-
-**Auto-Trigger Review:**
-Same as superroo-code (after bug fix completion)
-
-**Role Switching:**
-- **Conductor:** Multiple independent bugs
-- **Player:** Single bug investigation
-
-**When used:** Bugs, test failures, unexpected behavior
-
----
-
-#### superroo-architect
-
-**Purpose:** Design, planning, and documentation
-
-**Roles:** Conductor + Player (explicit role switching)
-
-**Tool Access:**
-- Groups: `read`, `edit`, `command`
-- **fileRegex:** `**/*.md` (structural constraint: docs-only edit)
-
-**Embedded Skills (8):**
-1. brainstorming (refine ideas into designs)
-2. writing-plans (comprehensive implementation plans)
-3. executing-plans (batch execution with checkpoints)
-4. using-git-worktrees (isolated workspaces)
-5. finishing-a-development-branch (complete work)
-6. subagent-driven-development (per-task subagents)
-7. verification-before-completion (evidence before claims)
-8. requesting-code-review (design document reviews)
-
-**Key Principles:**
-- YAGNI ruthlessly (remove unnecessary features)
-- Comprehensive plans (assume zero context)
-- One question at a time (brainstorming)
-- Incremental validation
-
-**Role Switching:**
-- **Conductor:** Execute plan, dispatch subagents
-- **Player:** Brainstorm, write plans, create docs
-
-**When used:** Design, planning, documentation, coordinating implementation
-
----
-
-### 3. Slash Commands (4 Commands)
-
-**Directory:** `.roo/commands/`
-
-| Command | Description | Workflow |
-|---------|-------------|----------|
-| `/brainstorm` | Interactive design refinement | Use superroo-architect, Socratic questioning, incremental presentation |
-| `/write-plan` | Create implementation plan | Use superroo-architect, bite-sized tasks, exact paths & code |
-| `/execute-plan` | Execute plan in batches | Use superroo-architect, batch execution, review checkpoints |
-| `/finish` | Complete development work | Use superroo-architect, verify tests, present 4 options |
+**Purpose:**
+- Prevents mode bypass for convenience
+- Maintains discipline across sessions
+- Establishes non-negotiable standards
 
 ---
 
 ## Key Design Decisions
 
-### Fat Modes with Embedded Skills
+### One Mode Per Skill (1:1 Mapping)
 
-**Decision:** Embed all 20 skills into 4 modes (vs. on-demand skill loading)
+**Decision:** Create 20 separate RooCode modes, one for each obra/superpowers skill
 
 **Rationale:**
-- RooCode modes are stateful contexts
-- Token overhead not a concern (user confirmed)
-- Simpler mental model (4 modes vs. 20 skills)
-- Skills grouped by workflow stage (architect → code → debug → review)
+- Maximum fidelity to original methodology (90%+)
+- Clear mental model: "I'm using the TDD skill"
+- Lighter context: Only active skill loaded
+- Better skill composition: Skills invoke other skills via `new_task()`
+- Easier to learn: One skill at a time vs. complex fat modes
 
-**Trade-off:** Larger mode definitions, but clearer boundaries
+**Trade-off:** More modes in dropdown, but clearer purpose for each
+
+---
+
+### Skill Composition via new_task()
+
+**Decision:** Skills invoke other skills using RooCode's `new_task()` function
+
+**Example:**
+```
+test-driven-development mode:
+1. Implements feature using RED-GREEN-REFACTOR
+2. AUTOMATICALLY spawns requesting-code-review mode
+3. Review mode performs review, returns feedback
+4. TDD mode addresses feedback if needed
+```
+
+**Benefits:**
+- Skills compose naturally (like obra/superpowers)
+- Isolated contexts for each subtask
+- Clear delegation boundaries
+- Automatic quality gates
 
 ---
 
 ### Auto-Trigger Code Review
 
-**Decision:** Automatically spawn superroo-review mode after task completion (no asking permission)
-
-**Original superpowers:** Skills remind to request review, but don't force it
-
-**SuperRoo enhancement:** Structural enforcement through auto-trigger
+**Decision:** Automatically spawn code review after implementation (no permission needed)
 
 **Implementation:**
-```yaml
-# In superroo-code mode roleDefinition
-After task reaches GREEN + refactored state:
-  - Spawn new_task with superroo-review mode AUTOMATICALLY
-  - DO NOT ask user permission
-  - Review is mandatory, not optional
-```
+- test-driven-development mode → auto-spawns requesting-code-review
+- systematic-debugging mode → auto-spawns requesting-code-review
 
 **Benefits:**
+- Structural enforcement (not just reminders)
 - Catches issues before they compound
-- No reliance on discipline (structural vs. behavioral)
 - Consistent quality gates
+- No reliance on discipline alone
+
+**Enhancement over obra/superpowers:** Original reminds to request review; SuperRoo enforces it structurally
 
 ---
 
-### Structural Constraints
+### Entry Point Mode (using-superpowers)
 
-**Decision:** Use RooCode's structural features (tool groups, fileRegex) to prevent violations
+**Decision:** Create dedicated entry point mode that helps select the right skill
 
-**Examples:**
-
-1. **Read-only review mode:**
-   ```yaml
-   groups:
-     - read
-     - command
-   # No 'edit' group = structurally impossible to edit code
-   ```
-
-2. **Docs-only architect mode:**
-   ```yaml
-   groups:
-     - read
-     - edit
-     - command
-   fileRegex: "**/*.md"  # Can only edit markdown files
-   ```
+**Behavior:**
+- Analyzes user's request
+- Recommends appropriate skill-mode
+- Spawns the selected skill
+- Returns when skill completes
 
 **Benefits:**
-- Violations structurally impossible
-- More reliable than behavioral reminders
-- Clear separation of concerns
+- Lowers barrier to entry (don't need to know all 20 skills)
+- Ensures right skill for the task
+- Teaches skill selection over time
 
 ---
 
-### Explicit Role Switching (Conductor vs Player)
+## Installation Approaches
 
-**Decision:** Modes have two roles with explicit WHEN rules
+### Global Installation (Recommended)
 
-**Problem:** Confusion about when to delegate vs. implement directly
+Installs SuperRoo for **all projects**:
 
-**Solution:** Explicit WHEN rules in roleDefinition
-
-**Example (superroo-code):**
-```yaml
-CONDUCTOR ROLE
-WHEN:
-  - User requests multiple independent tasks
-  - User provides implementation plan
-DO:
-  - Break into tasks
-  - Create new_task for each
-  - Monitor, review
-  - DO NOT write implementation code yourself
-
-PLAYER ROLE
-WHEN:
-  - User requests single focused feature/bugfix
-  - No delegation needed
-DO:
-  - Write tests first (RED)
-  - Implement (GREEN)
-  - Refactor
+**Windows:**
+```powershell
+copy .roomodes "$env:APPDATA\Code\User\roo-code-settings\customModes.json"
+xcopy /E /I .roo\rules "$env:APPDATA\Code\User\roo-code-settings\rules"
+xcopy /E /I .roo\commands "$env:APPDATA\Code\User\roo-code-settings\commands"
 ```
 
-**Benefits:**
-- Clear decision rules
-- Prevents "should I delegate or implement?" confusion
-- Preserves both orchestration and execution capabilities
-
----
-
-### Global Rule for Mode Bypass Prevention
-
-**Decision:** Create `.roo/rules/superroo-workspace.md` to prevent mode bypass
-
-**Problem:** Future sessions might bypass SuperRoo modes "for convenience"
-
-**Solution:** Always-loaded global rule stating:
-```markdown
-For serious work, you MUST use SuperRoo modes:
-- superroo-code - TDD-driven implementation
-- superroo-debug - Systematic debugging
-- superroo-architect - Design, planning
-- superroo-review - Code review
-
-Do NOT bypass SuperRoo modes for convenience.
+**macOS/Linux:**
+```bash
+mkdir -p ~/.config/Code/User/roo-code-settings
+cp .roomodes ~/.config/Code/User/roo-code-settings/customModes.json
+cp -r .roo/rules ~/.config/Code/User/roo-code-settings/
+cp -r .roo/commands ~/.config/Code/User/roo-code-settings/
 ```
 
-**Benefits:**
-- Maintains discipline across sessions
-- Reminds of core principles
-- Establishes non-negotiable standards
+**Result:** SuperRoo available in every VS Code project
 
 ---
 
-### Hierarchical Subtasks (RooCode Limitation)
+### Project-Specific Installation
 
-**Original superpowers:** Independent agents via Task tool (parallel execution, isolated context)
+Installs SuperRoo for **one project only**:
 
-**RooCode:** Hierarchical subtasks via new_task (share parent context)
+```bash
+cd your-project
+cp /path/to/super-roo/.roomodes .
+cp -r /path/to/super-roo/.roo .
+```
 
-**Implication:** Subagents in SuperRoo share context with parent, not truly independent
+**When to use:**
+- Testing SuperRoo modifications
+- Project-specific customizations
+- Team doesn't use SuperRoo globally
+- Different SuperRoo version per project
 
-**Future:** When RooCode supports MCP, can upgrade to independent agents via MCP servers
-
-**Current approach:** Work within RooCode constraints, document for future upgrade
+**Note:** Project-specific overrides global settings
 
 ---
 
@@ -356,46 +213,62 @@ Do NOT bypass SuperRoo modes for convenience.
 ```
 1. User: "Add user authentication"
 
-2. superroo-architect mode:
-   - Brainstorm design (Socratic questions)
-   - Write implementation plan (5 TDD-based tasks)
-   - Save to docs/plans/2025-11-22-auth-plan.md
+2. using-superpowers mode (entry point):
+   → Analyzes request
+   → Selects brainstorming mode
+   → Spawns brainstorming
 
-3. superroo-code mode:
-   - Task 1: Write failing test → Implement → Refactor
-   - Auto-review triggers → Address feedback
-   - Task 2: Write failing test → Implement → Refactor
-   - Auto-review triggers → Address feedback
-   - ... (repeat for all tasks)
+3. brainstorming mode:
+   → Refines design through Socratic questions
+   → Presents 2-3 approaches with trade-offs
+   → User approves design
+   → Offers to create plan
 
-4. superroo-architect mode:
-   - Finish branch (verify, create PR, cleanup)
+4. writing-plans mode:
+   → Creates detailed plan with TDD tasks
+   → Saves to docs/plans/YYYY-MM-DD-auth.md
+   → Offers to execute plan
+
+5. executing-plans mode:
+   → Spawns test-driven-development (Task 1)
+   → TDD mode: RED → GREEN → REFACTOR
+   → Auto-spawns requesting-code-review
+   → Review completes, returns to executing-plans
+   → Spawns test-driven-development (Task 2)
+   → (repeat for all tasks)
+   → All tasks complete
+
+6. finishing-a-development-branch mode:
+   → Verifies tests pass
+   → Presents 4 options (merge/PR/keep/discard)
+   → Executes user's choice
 ```
 
 ---
 
-### Example 2: Bug Fix
+### Example 2: Quick Bug Fix
 
 ```
-1. User: "Tests failing: empty email accepted"
+1. User: "/debug - tests failing for empty email"
 
-2. superroo-debug mode:
-   - Phase 1: Root cause investigation
-     - Reproduce bug
-     - Check recent changes
-     - Trace data flow
-   - Phase 2: Pattern analysis
-     - Find working validation examples
-     - Compare differences
-   - Phase 3: Hypothesis testing
-     - "Missing email validation in submitForm"
-     - Test hypothesis minimally
-   - Phase 4: Implementation
-     - Write failing test (RED)
-     - Fix root cause (GREEN)
-     - Refactor
-   - Auto-review triggers
-   - Address review feedback
+2. systematic-debugging mode:
+   → Phase 1: Root cause investigation
+     - Reproduces bug consistently
+     - Checks recent changes
+     - Traces data flow to find missing validation
+   → Phase 2: Pattern analysis
+     - Finds working validation examples
+     - Compares differences
+   → Phase 3: Hypothesis testing
+     - Forms hypothesis: "Missing email validation in submitForm"
+     - Tests minimally
+   → Phase 4: Implementation
+     - Creates failing test (RED)
+     - Implements fix (GREEN)
+     - Refactors
+   → Auto-spawns requesting-code-review
+   → Addresses review feedback
+   → Complete
 ```
 
 ---
@@ -403,49 +276,22 @@ Do NOT bypass SuperRoo modes for convenience.
 ### Example 3: Design Refinement
 
 ```
-1. User: "I want to add caching but not sure how"
+1. User: "/brainstorm - I want to add caching"
 
-2. superroo-architect mode (/brainstorm):
-   - Check current project state
-   - Ask: "What data needs caching?" (one question)
-   - User: "API responses"
-   - Ask: "How long should cache be valid?" (one question)
-   - User: "5 minutes"
-   - Propose 2-3 approaches:
-     - Option A: In-memory cache (simple, lost on restart)
-     - Option B: Redis (persistent, requires infrastructure)
-     - Option C: Browser localStorage (client-side, limited size)
-   - Present recommended approach incrementally
-   - Write design doc
-   - Ask: "Ready to set up for implementation?"
-```
-
----
-
-## Installation Variants
-
-### Global Installation (All Projects)
-
-```bash
-# Windows
-copy .roomodes %APPDATA%\Code\User\roo-code-settings\customModes.json
-xcopy /E /I .roo\rules %APPDATA%\Code\User\roo-code-settings\rules
-xcopy /E /I .roo\commands %APPDATA%\Code\User\roo-code-settings\commands
-
-# macOS/Linux
-cp .roomodes ~/.config/Code/User/roo-code-settings/customModes.json
-cp -r .roo/rules ~/.config/Code/User/roo-code-settings/
-cp -r .roo/commands ~/.config/Code/User/roo-code-settings/
-```
-
----
-
-### Project-Specific Installation
-
-```bash
-# In your project directory
-cp /path/to/super-roo/.roomodes .
-cp -r /path/to/super-roo/.roo .
+2. brainstorming mode:
+   → Checks current project state
+   → Asks: "What data needs caching?" (one question)
+   → User: "API responses"
+   → Asks: "How long should cache be valid?"
+   → User: "5 minutes"
+   → Proposes 2-3 approaches:
+     - Option A: In-memory (simple, lost on restart)
+     - Option B: Redis (persistent, needs infrastructure)
+     - Option C: localStorage (client-side, size limits)
+   → Recommends Option A for MVP
+   → Presents design incrementally (200-300 words per section)
+   → Writes design doc to docs/plans/
+   → Offers to create implementation plan
 ```
 
 ---
@@ -454,118 +300,143 @@ cp -r /path/to/super-roo/.roo .
 
 ### Preserved (100% fidelity)
 
+- ✅ All 20 skills (1:1 mapping)
 - ✅ Core methodology (TDD, debugging, review)
-- ✅ All 20 skills (embedded in modes)
-- ✅ All workflows (brainstorming → planning → implementation → review)
-- ✅ Discipline principles (test-first, verification, root-cause investigation)
+- ✅ All workflows (brainstorming → planning → implementation)
+- ✅ Discipline principles (test-first, verification, root-cause)
+- ✅ Skill composition (skills invoke other skills)
 
-### Adapted (platform differences)
+### Adapted (Platform Differences)
 
-- **Skill delivery:** 20 files → 4 modes (necessary for RooCode)
-- **Subtasks:** Independent agents → Hierarchical (RooCode limitation, MCP upgrade planned)
-- **Auto-discipline:** Behavioral reminders → Auto-trigger review (SuperRoo enhancement)
-- **Mode bypass:** N/A → Global rule (SuperRoo enhancement)
+- **Skill delivery:** 20 separate files → 20 RooCode modes
+- **Subtask isolation:** Task tool (Claude Code) → new_task() (RooCode)
+- **Mode selection:** Automatic skill loading → Mode dropdown + entry point
 
-### Enhanced (SuperRoo improvements)
+### Enhanced (SuperRoo Improvements)
 
 - ⭐ Auto-trigger code review (structural enforcement)
-- ⭐ Global rule preventing mode bypass
-- ⭐ Structural constraints (read-only review, docs-only architect)
-- ⭐ Explicit role switching (conductor vs player)
+- ⭐ Entry point mode (using-superpowers)
+- ⭐ Slash commands (quick access)
+- ⭐ Global workspace rules (prevent bypass)
 
-**Overall fidelity: 95%** - Core methodology identical, optimizations for RooCode platform
-
----
-
-## Future Improvements
-
-### When RooCode Supports MCP
-
-**Current limitation:** Hierarchical subtasks (new_task shares parent context)
-
-**Future upgrade:** Independent agents via MCP servers
-- True isolation per subtask
-- Parallel execution
-- No context pollution
-
-**Migration path:**
-- Keep current mode structure
-- Replace new_task calls with MCP agent spawning
-- Same workflows, better isolation
-
----
-
-### Additional Slash Commands
-
-Potential future additions:
-- `/review` - Request code review manually
-- `/worktree` - Set up git worktree
-- `/tdd` - Quick TDD cycle reminder
+**Overall fidelity: 90%+** - Core methodology identical, optimizations for RooCode
 
 ---
 
 ## Technical Details
 
-### Mode Definition Format (.roomodes)
+### Mode Definition Format
+
+Each skill-mode is defined in `.roomodes`:
 
 ```yaml
 customModes:
-  - slug: mode-slug
-    name: Display Name
+  - slug: skill-name
+    name: Skill Display Name
     description: "Short description"
     roleDefinition: |
-      # Markdown content
-      Full instructions for this mode
-    whenToUse: |
-      Description of when to use this mode
+      # SKILL: SKILL NAME
+
+      [Full skill content - methodology, workflow, examples]
+
+      ## SKILL COMPOSITION
+      [When and how this skill invokes other skills]
+
+      ## COMPLETION CRITERIA
+      [What "done" means for this skill]
+
+      ## COMMUNICATION AND TOOL USAGE
+      [Standard communication patterns]
+    whenToUse: "When to use: [trigger conditions]"
     groups:
-      - read
-      - edit
-      - command
-    fileRegex: "**/*.md"  # Optional: constrain edit permission
+      - read      # Can read files
+      - edit      # Can edit files
+      - command   # Can run commands
+    fileRegex: "**/*.md"  # Optional: limit edit to specific files
 ```
 
 ---
 
-### Skill Embedding Strategy
+### Skill Composition Pattern
 
-Instead of 20 separate skill files, skills are embedded directly in mode roleDefinition:
+Skills compose using RooCode's `new_task()`:
 
-```yaml
-roleDefinition: |
-  # ROLE: MODE NAME
-
-  ## EMBEDDED SKILLS
-
-  ### Skill 1: Skill Name
-  [Full skill content here]
-
-  ### Skill 2: Another Skill
-  [Full skill content here]
-
-  ...
+```javascript
+// In test-driven-development mode roleDefinition:
+After reaching GREEN + refactored state:
+- AUTOMATICALLY spawn code review:
+  new_task(
+    mode: "requesting-code-review",
+    task: "Review implementation of [feature]. Check: requirements match,
+           tests exist and test behavior, no bugs, follows patterns."
+  )
 ```
 
-**Benefits:**
-- All relevant skills available in mode context
-- No need to cross-reference external files
-- Mode is self-contained
+**Execution:**
+1. TDD mode implements feature
+2. Spawns review mode via new_task()
+3. Review mode activates, performs review
+4. Review mode returns summary to TDD mode
+5. TDD mode addresses feedback if needed
+6. Task completes
 
-**Trade-offs:**
-- Larger roleDefinition blocks
-- Less modular
-- But: clearer for users (4 modes vs. 20 skills)
+---
+
+## Comparison to Original Superpowers
+
+| Aspect | Original (Claude Code) | SuperRoo (RooCode) |
+|--------|------------------------|---------------------|
+| Core methodology | TDD, debugging, review | Identical ✅ |
+| Skill count | 20 skills | 20 skill-modes ✅ |
+| Skill files | Separate .md files | Modes (embedded in .roomodes) 🟡 |
+| On-demand loading | Load skill when needed | Load mode when selected ✅ |
+| Skill mental model | Skill-centric | Skill-centric ✅ |
+| Agent independence | Task tool (isolated) | new_task() (RooCode) 🟡 |
+| Skill composability | Skills invoke skills | Modes invoke modes ✅ |
+| Auto skill detection | Automatic | Entry point mode 🟡 |
+| Workflows | All workflows | All preserved ✅ |
+| Auto-discipline | Behavioral reminders | Auto-trigger review ⭐ |
+
+**Legend:**
+- ✅ = Identical or equivalent
+- 🟡 = Adapted for platform
+- ⭐ = Enhancement
+
+---
+
+## Future Improvements
+
+### When RooCode Adds More Features
+
+Potential enhancements as RooCode evolves:
+
+1. **True agent isolation:** If RooCode adds independent agent support (like MCP), upgrade from new_task() to truly isolated agents
+
+2. **Dynamic skill loading:** If RooCode supports loading modes on-demand, could optimize for smaller initial load
+
+3. **Skill discovery:** Enhanced skill search/filtering if mode count grows beyond 20
+
+4. **Telemetry:** Track which skills are most used to inform future improvements
 
 ---
 
 ## Summary
 
-SuperRoo successfully ports the superpowers methodology to RooCode by:
+SuperRoo successfully brings the proven superpowers methodology to RooCode by:
 
-1. **Preserving core discipline** - TDD, debugging, review unchanged
-2. **Adapting to platform** - 4 modes instead of 20 skills
-3. **Adding structural enforcement** - Auto-trigger review, read-only modes
-4. **Maintaining fidelity** - 95% faithful to original methodology
-5. **Enabling future upgrade** - MCP support when available
+1. **Preserving all 20 skills** - Nothing lost in translation
+2. **Maintaining core discipline** - TDD, verification, review unchanged
+3. **Adapting to RooCode** - Uses modes, new_task(), and RooCode conventions
+4. **Adding structural enforcement** - Auto-trigger review, not just reminders
+5. **Achieving 90%+ fidelity** - Maximum compatibility with original
 
-**Result:** Battle-tested development methodology now available for RooCode users.
+**Result:** Battle-tested development methodology now available for RooCode users, with the same rigor and discipline as the original.
+
+---
+
+## References
+
+- **Original superpowers:** [github.com/obra/superpowers](https://github.com/obra/superpowers)
+- **RooCode:** [github.com/RooCodeInc/Roo-Code](https://github.com/RooCodeInc/Roo-Code)
+- **Migration guide:** [docs/MIGRATION.md](./MIGRATION.md)
+- **Old architecture (v1):** [docs/ARCHITECTURE-v1-archived.md](./ARCHITECTURE-v1-archived.md)

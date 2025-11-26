@@ -2,7 +2,7 @@
 description: Complete development work (verify, merge, PR, or cleanup)
 ---
 
-Switch to superroo-architect mode and finish the development branch:
+Switch to finishing-a-development-branch mode and finish the development branch:
 
 **Process:**
 

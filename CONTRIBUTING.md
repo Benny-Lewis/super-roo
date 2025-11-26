@@ -63,15 +63,20 @@ Have ideas for improving SuperRoo?
 Use the SuperRoo methodology for all contributions:
 
 #### For New Features:
-1. **Switch to superroo-architect mode**
-2. Use `/brainstorm` to refine the design
-3. Use `/write-plan` to create implementation plan
-4. Switch to **superroo-code mode**
-5. Implement with TDD (test first, always)
+1. **Start with using-superpowers mode** (entry point)
+2. Use `/brainstorm` or select **brainstorming mode** to refine the design
+3. Use `/write-plan` or select **writing-plans mode** to create implementation plan
+4. Use `/execute-plan` or select **executing-plans mode**
+5. Subtasks will use **test-driven-development mode** (TDD enforced)
 6. Auto-review will trigger after each task
 
+**Or go direct:**
+1. Select **test-driven-development mode** for implementing
+2. Write test first (RED), implement (GREEN), refactor
+3. Auto-review triggers automatically
+
 #### For Bug Fixes:
-1. **Switch to superroo-debug mode**
+1. **Use systematic-debugging mode** (or `/debug`)
 2. Follow the 4-phase debugging framework:
    - Phase 1: Root cause investigation
    - Phase 2: Pattern analysis
@@ -80,9 +85,9 @@ Use the SuperRoo methodology for all contributions:
 3. Auto-review will trigger after fix
 
 #### For Documentation:
-1. **Switch to superroo-architect mode** (docs-only edit permission)
-2. Make changes
-3. Request review if significant
+1. **Use brainstorming or writing-plans mode** for substantial docs
+2. Or any mode for minor doc changes
+3. Request review if significant (use **requesting-code-review mode** or `/review`)
 
 ---
 
