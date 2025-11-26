@@ -424,6 +424,26 @@ graph TD
 
 ### Example 3: Design Refinement
 
+**Visual workflow:**
+
+```mermaid
+graph TD
+    Start[User: /brainstorm - add caching] --> Brain[brainstorming mode]
+    Brain --> Q1[Ask: What data needs caching?]
+    Q1 --> Q2[Ask: How long valid?]
+    Q2 --> Options[Propose 2-3 approaches]
+    Options --> Present[Present design incrementally]
+    Present --> Doc[Write docs/plans/design.md]
+    Doc --> Offer[Offer: Create implementation plan?]
+    Offer --> Plan[writing-plans mode]
+
+    style Brain fill:#fff4e1
+    style Options fill:#fff4e1
+    style Plan fill:#fff4e1
+```
+
+**Detailed walkthrough:**
+
 ```
 1. User: "/brainstorm - I want to add caching"
 
