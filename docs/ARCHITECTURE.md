@@ -206,6 +206,61 @@ cp -r /path/to/super-roo/.roo .
 
 ---
 
+## Troubleshooting
+
+Quick solutions to common SuperRoo issues.
+
+### Mode not appearing in dropdown
+
+**Symptom:** RooCode mode selector doesn't show 20 SuperRoo skill-modes
+
+**Solution:**
+1. Verify file location: `~/.config/Code/User/roo-code-settings/customModes.json` (macOS/Linux) or `%APPDATA%\Code\User\roo-code-settings\customModes.json` (Windows)
+2. Restart VS Code completely (not just reload window)
+3. Validate YAML: `python3 -c "import yaml; yaml.safe_load(open('.roomodes'))"`
+
+### Slash commands don't work
+
+**Symptom:** Typing `/tdd` or `/debug` doesn't trigger commands
+
+**Solution:**
+1. Check `.roo/commands/` directory exists with 7 .md files
+2. Restart VS Code completely
+3. Verify RooCode extension is active in VS Code extensions panel
+
+### Wrong mode activates
+
+**Symptom:** Selecting one mode activates a different one
+
+**Solution:**
+1. Check for duplicate slugs in `.roomodes` file
+2. Project-specific `.roomodes` may override global settings
+3. Remove project-specific `.roomodes` if not intended
+
+### Auto-review not triggering
+
+**Symptom:** test-driven-development completes without spawning requesting-code-review
+
+**Solution:**
+1. Verify mode has `new_task()` call in roleDefinition section
+2. Check RooCode version supports `new_task()` (update if needed)
+3. Review mode definition in `.roomodes` for syntax errors
+
+### Skills don't compose (subtasks fail)
+
+**Symptom:** Modes don't spawn other modes via `new_task()`
+
+**Solution:**
+1. Enable auto-approval for read operations in VS Code settings (speeds up subtasks)
+2. Check RooCode console (View → Output → RooCode) for errors
+3. Verify `.roomodes` doesn't have syntax errors
+
+**Still having issues?**
+- Check [GitHub Issues](https://github.com/Benny-Lewis/super-roo/issues)
+- File a new issue with: RooCode version, error messages, `.roomodes` content, steps to reproduce
+
+---
+
 ## Workflow Examples
 
 ### Example 1: Feature Implementation
