@@ -375,6 +375,28 @@ graph TD
 
 ### Example 2: Quick Bug Fix
 
+**Visual workflow:**
+
+```mermaid
+graph TD
+    Start[User: /debug - tests failing] --> Debug[systematic-debugging mode]
+    Debug --> Phase1[Phase 1: Root Cause]
+    Phase1 --> Phase2[Phase 2: Pattern Analysis]
+    Phase2 --> Phase3[Phase 3: Hypothesis]
+    Phase3 --> Phase4[Phase 4: Implementation]
+    Phase4 --> TDD[Write failing test RED]
+    TDD --> Fix[Implement fix GREEN]
+    Fix --> Review[Auto-spawn requesting-code-review]
+    Review --> Done[Complete]
+
+    style Debug fill:#e1f5ff
+    style TDD fill:#ffebee
+    style Fix fill:#e8f5e9
+    style Review fill:#fce4ec
+```
+
+**Detailed walkthrough:**
+
 ```
 1. User: "/debug - tests failing for empty email"
 
