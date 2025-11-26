@@ -4,14 +4,28 @@ This workspace enforces SuperRoo development discipline.
 
 ---
 
-## Use SuperRoo Modes
+## Use SuperRoo Skill-Modes
 
-For serious work, you MUST use SuperRoo modes:
+For serious work, you MUST use SuperRoo skill-modes. Start with:
+- **using-superpowers** - Entry point that selects the right skill
 
-- **superroo-code** - TDD-driven implementation
-- **superroo-debug** - Systematic root-cause debugging
-- **superroo-architect** - Design, planning, documentation
-- **superroo-review** - Rigorous code review (read-only)
+Or use slash commands for quick access:
+- `/tdd` - Test-driven development
+- `/debug` - Systematic debugging
+- `/brainstorm` - Design refinement
+- `/write-plan` - Create implementation plan
+- `/execute-plan` - Execute plan with TDD
+- `/review` - Request code review
+
+Or select directly from 20 skill-modes:
+- **test-driven-development** - RED-GREEN-REFACTOR cycle
+- **systematic-debugging** - 4-phase root-cause investigation
+- **brainstorming** - Socratic design refinement
+- **writing-plans** - Comprehensive implementation plans
+- **executing-plans** - Batch execution with review checkpoints
+- **requesting-code-review** - Perform rigorous code review
+- **receiving-code-review** - Process review feedback
+- And 13 more specialized skills...
 
 **Do NOT bypass SuperRoo modes for convenience.**
 
@@ -20,7 +34,7 @@ Only use other modes for:
 - ⚠️ User explicitly requests different mode
 - ⚠️ Quick questions that don't involve code changes
 
-When in doubt, use a superpowers mode. They exist for a reason.
+When in doubt, use a skill-mode. They exist for a reason.
 
 ---
 
@@ -45,7 +59,7 @@ Patching symptoms creates more bugs.
 
 ### 👁️ REVIEW EARLY, REVIEW OFTEN
 
-Code review is automatic after task completion (superroo-code/debug).
+Code review is automatic after task completion (test-driven-development/systematic-debugging).
 Catch issues before they compound.
 
 ---
@@ -62,8 +76,11 @@ rigorous development. Bypassing defeats the purpose.
 
 ---
 
-**When you start a session, select the appropriate SuperRoo mode:**
-- superroo-architect for planning and design
-- superroo-code for implementation
-- superroo-debug for investigating bugs
-- superroo-review for code review only
+**When you start a session, select the appropriate SuperRoo skill-mode:**
+- using-superpowers for automatic skill selection
+- brainstorming for design refinement
+- writing-plans for implementation planning
+- test-driven-development for feature implementation
+- systematic-debugging for investigating bugs
+- requesting-code-review for code review only
+- Or use slash commands: /tdd, /debug, /brainstorm, /write-plan, /execute-plan
