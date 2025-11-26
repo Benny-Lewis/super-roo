@@ -315,7 +315,7 @@ graph TD
 
 ```mermaid
 graph TD
-    Start[User: Add user authentication] --> Entry[using-superpowers mode]
+    Start[User: Add user authentication<br/>→ using-superpowers mode] --> Entry[using-superpowers mode]
     Entry --> Brain[brainstorming mode]
     Brain --> Plan[writing-plans mode]
     Plan --> Exec[executing-plans mode]
@@ -379,7 +379,7 @@ graph TD
 
 ```mermaid
 graph TD
-    Start[User: /debug - tests failing] --> Debug[systematic-debugging mode]
+    Start[User: /debug - tests failing<br/>→ systematic-debugging mode] --> Debug[systematic-debugging mode]
     Debug --> Phase1[Phase 1: Root Cause]
     Phase1 --> Phase2[Phase 2: Pattern Analysis]
     Phase2 --> Phase3[Phase 3: Hypothesis]
@@ -428,7 +428,7 @@ graph TD
 
 ```mermaid
 graph TD
-    Start[User: /brainstorm - add caching] --> Brain[brainstorming mode]
+    Start[User: /brainstorm - add caching<br/>→ brainstorming mode] --> Brain[brainstorming mode]
     Brain --> Q1[Ask: What data needs caching?]
     Q1 --> Q2[Ask: How long valid?]
     Q2 --> Options[Propose 2-3 approaches]
