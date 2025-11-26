@@ -302,3 +302,37 @@ This design adds practical enhancements to ARCHITECTURE.md without bloating the 
 - **Maintains focus**: Both are reference material, not marketing
 
 Total additions: ~150 lines to ARCHITECTURE.md (~34% increase, reasonable)
+
+---
+
+## Implementation Complete
+
+**Date:** 2025-01-25
+**Status:** ✅ Implemented
+
+### Changes Made
+1. Added troubleshooting section (5 common issues) after Installation Approaches
+2. Added 4 Mermaid diagrams to Workflow Examples section:
+   - Comprehensive overview at section start
+   - Feature implementation diagram before Example 1
+   - Bug fix diagram before Example 2
+   - Design refinement diagram before Example 3
+3. Clarified initial mode routing in all diagrams (shows which mode handles each message type)
+
+### File Modified
+- `docs/ARCHITECTURE.md` - Added ~169 lines (442 → 611 lines)
+
+### Verification
+- ✅ All diagrams render correctly with proper Mermaid syntax
+- ✅ Troubleshooting section is clear and actionable
+- ✅ Diagrams complement existing text examples
+- ✅ Color coding is intuitive and consistent
+- ✅ User message routing is now visible in diagrams
+
+### Commits
+- bc9e04d: Add troubleshooting section to ARCHITECTURE.md
+- 54766b0: Add comprehensive workflow overview diagram
+- d889f3c: Add feature implementation workflow diagram
+- 809511e: Add bug fix workflow diagram
+- b05bca4: Add design refinement workflow diagram
+- c5b2883: Clarify initial mode routing in workflow diagrams
