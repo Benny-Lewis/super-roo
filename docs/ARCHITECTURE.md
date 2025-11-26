@@ -263,6 +263,52 @@ Quick solutions to common SuperRoo issues.
 
 ## Workflow Examples
 
+### Overview: All Workflows
+
+This diagram shows how all SuperRoo workflows relate and compose:
+
+```mermaid
+graph TD
+    User[User Request] --> Entry[using-superpowers<br/>Entry Point]
+
+    Entry --> Brain[brainstorming<br/>Design Refinement]
+    Entry --> Debug[systematic-debugging<br/>Bug Investigation]
+    Entry --> Direct[Direct Mode Selection]
+
+    Brain --> Plan[writing-plans<br/>Implementation Plan]
+    Plan --> Exec[executing-plans<br/>Batch Execution]
+
+    Exec --> TDD[test-driven-development<br/>RED-GREEN-REFACTOR]
+    Direct --> TDD
+
+    Debug --> Phase[4-Phase Framework]
+    Phase --> TDD
+
+    TDD --> Review[requesting-code-review<br/>Auto-triggered]
+    Review --> Feedback{Feedback?}
+    Feedback -->|Issues Found| TDD
+    Feedback -->|Approved| Finish[finishing-a-development-branch<br/>Merge/PR/Cleanup]
+
+    style Entry fill:#e1f5ff
+    style Brain fill:#fff4e1
+    style Plan fill:#fff4e1
+    style Exec fill:#e8f5e9
+    style TDD fill:#e8f5e9
+    style Debug fill:#ffebee
+    style Review fill:#fce4ec
+    style Finish fill:#f3e5f5
+```
+
+**Color Legend:**
+- **Blue**: Entry points
+- **Yellow**: Planning/Design
+- **Green**: Implementation
+- **Red**: Debugging
+- **Pink**: Review
+- **Purple**: Completion
+
+---
+
 ### Example 1: Feature Implementation
 
 ```
