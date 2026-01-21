@@ -291,11 +291,6 @@ Contributions welcome! Please:
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
----
-
-## License
-
-MIT License - see [LICENSE](LICENSE) file
 
 ---
 
