@@ -1,7 +1,7 @@
-# Migration Guide: 4 Modes → 20 Skill-Modes
+# Migration Guide: 4 Modes → 21 Skill-Modes
 
 **From:** superroo v1 (4 fat modes)
-**To:** superroo v2 (20 skill-modes)
+**To:** superroo v2 (21 skill-modes)
 
 ---
 
@@ -10,7 +10,7 @@
 **Goal:** Achieve 90% fidelity to [obra/superpowers](https://github.com/obra/superpowers)
 
 **Changes:**
-- 4 fat modes → 20 skill-modes (1:1 mapping to obra skills)
+- 4 fat modes → 21 skill-modes (adapted from obra skills)
 - Embedded skills → One mode per skill
 - Shared context → Isolated subtasks via `new_task`
 - Mode-centric → Skill-centric mental model
@@ -41,7 +41,7 @@
 - superroo-review (review only)
 ```
 
-**New:** Pick from 20 skill-modes OR use entry point
+**New:** Pick from 21 skill-modes OR use entry point
 ```
 - using-superpowers (entry point, recommends skill)
 - Or direct: test-driven-development, systematic-debugging, etc.
@@ -104,7 +104,7 @@ cp .roomodes ~/.config/Code/User/roo-code-settings/customModes.json
 
 **Step 5:** Verify
 - Open mode selector
-- Should see 20 skill-modes
+- Should see 21 skill-modes
 - Test: `/tdd`, `/debug`, `/brainstorm` commands
 
 ### If Using Project-Specific Installation
@@ -161,7 +161,7 @@ cp -r /path/to/super-roo/.roo .
 
 ## Troubleshooting
 
-### "I don't see 20 modes in dropdown"
+### "I don't see 21 modes in dropdown"
 
 **Check:**
 1. Did you restart VS Code?
@@ -236,7 +236,7 @@ git checkout <commit-before-redesign>
 The v2 redesign achieves **maximum fidelity** to obra/superpowers while maintaining all the benefits of the original SuperRoo implementation.
 
 **Key changes:**
-- 20 skill-modes (one per skill)
+- 21 skill-modes (adapted from obra/superpowers)
 - Skills compose via isolated subtasks
 - Entry point mode for skill selection
 - Same workflows, better structure
