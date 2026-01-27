@@ -6,9 +6,9 @@
 
 ## Overview
 
-SuperRoo is a 1:1 port of the [obra/superpowers](https://github.com/obra/superpowers) development methodology from Claude Code to RooCode. It preserves all 20 skills and the core TDD/debugging/review discipline while adapting to RooCode's mode-based architecture.
+SuperRoo adapts the [obra/superpowers](https://github.com/obra/superpowers) development methodology from Claude Code to RooCode. It preserves the core TDD/debugging/review discipline while adapting to RooCode's mode-based architecture.
 
-**Architecture:** 20 skills from superpowers → 20 skill-modes in RooCode (1:1 mapping)
+**Architecture:** 21 skill-modes in RooCode (adapted from superpowers + Super-Roo exclusives)
 
 ---
 
@@ -16,11 +16,11 @@ SuperRoo is a 1:1 port of the [obra/superpowers](https://github.com/obra/superpo
 
 SuperRoo consists of three main components:
 
-### 1. Custom Modes (20 Skill-Modes)
+### 1. Custom Modes (21 Skill-Modes)
 
 **File:** `.roomodes`
 
-All 20 skills from obra/superpowers are implemented as individual RooCode modes:
+Skills from obra/superpowers plus Super-Roo exclusives, implemented as individual RooCode modes:
 
 **Entry Point:**
 - **using-superpowers** - Entry point that helps select the right skill
@@ -92,7 +92,7 @@ Global rule that enforces SuperRoo methodology across all modes:
 
 ### One Mode Per Skill (1:1 Mapping)
 
-**Decision:** Create 20 separate RooCode modes, one for each obra/superpowers skill
+**Decision:** Create 21 separate RooCode modes, one for each skill
 
 **Rationale:**
 - Maximum fidelity to original methodology (90%+)
@@ -212,7 +212,7 @@ Quick solutions to common SuperRoo issues.
 
 ### Mode not appearing in dropdown
 
-**Symptom:** RooCode mode selector doesn't show 20 SuperRoo skill-modes
+**Symptom:** RooCode mode selector doesn't show 21 SuperRoo skill-modes
 
 **Solution:**
 1. Verify file location: `~/.config/Code/User/roo-code-settings/customModes.json` (macOS/Linux) or `%APPDATA%\Code\User\roo-code-settings\customModes.json` (Windows)
@@ -469,7 +469,7 @@ graph TD
 
 ### Preserved (100% fidelity)
 
-- ✅ All 20 skills (1:1 mapping)
+- ✅ Core skills preserved
 - ✅ Core methodology (TDD, debugging, review)
 - ✅ All workflows (brainstorming → planning → implementation)
 - ✅ Discipline principles (test-first, verification, root-cause)
@@ -477,7 +477,7 @@ graph TD
 
 ### Adapted (Platform Differences)
 
-- **Skill delivery:** 20 separate files → 20 RooCode modes
+- **Skill delivery:** Separate files → 21 RooCode modes
 - **Subtask isolation:** Task tool (Claude Code) → new_task() (RooCode)
 - **Mode selection:** Automatic skill loading → Mode dropdown + entry point
 
@@ -556,7 +556,7 @@ After reaching GREEN + refactored state:
 | Aspect | Original (Claude Code) | SuperRoo (RooCode) |
 |--------|------------------------|---------------------|
 | Core methodology | TDD, debugging, review | Identical ✅ |
-| Skill count | 20 skills | 20 skill-modes ✅ |
+| Skill count | 20 skills | 21 skill-modes ✅ |
 | Skill files | Separate .md files | Modes (embedded in .roomodes) 🟡 |
 | On-demand loading | Load skill when needed | Load mode when selected ✅ |
 | Skill mental model | Skill-centric | Skill-centric ✅ |
@@ -583,7 +583,7 @@ Potential enhancements as RooCode evolves:
 
 2. **Dynamic skill loading:** If RooCode supports loading modes on-demand, could optimize for smaller initial load
 
-3. **Skill discovery:** Enhanced skill search/filtering if mode count grows beyond 20
+3. **Skill discovery:** Enhanced skill search/filtering if mode count grows significantly
 
 4. **Telemetry:** Track which skills are most used to inform future improvements
 
@@ -593,7 +593,7 @@ Potential enhancements as RooCode evolves:
 
 SuperRoo successfully brings the proven superpowers methodology to RooCode by:
 
-1. **Preserving all 20 skills** - Nothing lost in translation
+1. **Preserving all skills** - Core methodology intact, plus Super-Roo exclusives
 2. **Maintaining core discipline** - TDD, verification, review unchanged
 3. **Adapting to RooCode** - Uses modes, new_task(), and RooCode conventions
 4. **Adding structural enforcement** - Auto-trigger review, not just reminders

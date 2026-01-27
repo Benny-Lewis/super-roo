@@ -198,8 +198,8 @@ These skills exist only in Super-Roo and should **not** be overwritten during sy
 
 | Phase | Skills | Status |
 |-------|--------|--------|
-| Phase 1 MVP | Core 20 skills (condensed) | Merged |
+| Phase 1 MVP | Core 21 skills (condensed) | Merged |
 | Phase 2 Tier 2 | verification-before-completion, finishing-a-development-branch, subagent-driven-development | Complete |
-| Phase 3 | Remaining skills with significant updates | Planned |
+| Phase 3 | 9 skills with significant updates | Complete |
 
 See `docs/plans/feat-super-roo-sync-phase*.md` for detailed implementation plans.

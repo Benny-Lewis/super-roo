@@ -10,7 +10,7 @@ Enforced TDD, systematic debugging, and automatic code review—the [superpowers
 
 ## What You Get
 
-**20 Skill-Modes** (1:1 mapping to [obra/superpowers](https://github.com/obra/superpowers)):
+**21 Skill-Modes** (adapted from [obra/superpowers](https://github.com/obra/superpowers)):
 
 **Entry Point:**
 - **using-superpowers** - Entry point that helps you select the right skill
@@ -118,7 +118,7 @@ Close and reopen VS Code completely (not just reload window).
 Open any project in VS Code and check:
 
 **Expected results:**
-- **Modes dropdown** shows 20 SuperRoo skill-modes:
+- **Modes dropdown** shows 21 SuperRoo skill-modes:
   - using-superpowers, test-driven-development, systematic-debugging, brainstorming, etc.
 
 - **Slash commands** work in RooCode chat:
@@ -184,7 +184,7 @@ cp -r /path/to/super-roo/.roo .
 
 **Option 2: Direct Skill Selection**
 1. **Use slash commands** - Quick access: `/tdd`, `/debug`, `/brainstorm`
-2. **Or select mode directly** - Choose from 20 skill-modes in dropdown
+2. **Or select mode directly** - Choose from 21 skill-modes in dropdown
 3. **Skills auto-compose** - Each skill knows when to invoke others
 
 ### Example Workflows
@@ -238,7 +238,7 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for complete technical details.
 
 **Key design decisions:**
 
-- **One mode per skill** - 20 skill-modes with 1:1 mapping to obra/superpowers
+- **One mode per skill** - 21 skill-modes adapted from obra/superpowers
 - **Skill composition via new_task** - Skills invoke other skills with isolated contexts
 - **Auto-trigger code review** - Review is automatic after task completion
 - **Structural constraints** - Read-only review mode enforced by RooCode
@@ -265,7 +265,7 @@ SuperRoo enforces discipline through structure, not suggestions:
 | Aspect | Original (Claude Code) | super-roo (RooCode) |
 |--------|------------------------|---------------------|
 | Core methodology | TDD, debugging, review | Identical ✅ |
-| Skill count | 20 skills | 20 skill-modes ✅ |
+| Skill count | 20 skills | 21 skill-modes ✅ |
 | Skill files | Separate files | Modes (embedded) 🟡 |
 | On-demand loading | Load when needed | Only active mode loaded ✅ |
 | Skill mental model | Skill-centric | Skill-centric ✅ |

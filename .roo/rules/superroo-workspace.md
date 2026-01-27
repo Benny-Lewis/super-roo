@@ -17,7 +17,7 @@ Or use slash commands for quick access:
 - `/execute-plan` - Execute plan with TDD
 - `/review` - Request code review
 
-Or select directly from 20 skill-modes:
+Or select directly from 21 skill-modes:
 - **test-driven-development** - RED-GREEN-REFACTOR cycle
 - **systematic-debugging** - 4-phase root-cause investigation
 - **brainstorming** - Socratic design refinement
@@ -25,7 +25,7 @@ Or select directly from 20 skill-modes:
 - **executing-plans** - Batch execution with review checkpoints
 - **requesting-code-review** - Perform rigorous code review
 - **receiving-code-review** - Process review feedback
-- And 13 more specialized skills...
+- And 14 more specialized skills...
 
 **Do NOT bypass SuperRoo modes for convenience.**
 
